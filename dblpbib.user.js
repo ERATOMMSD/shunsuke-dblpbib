@@ -45,20 +45,61 @@
 	title = document.evaluate(doiXPath, document, null, XPathResult.STRING_TYPE);
 	authors = document.evaluate(doiXPath, document, null, XPathResult.ORDERED_NODE_ITERATOR_TYPE);
 
-	function constructDBLPList() {
-		pubs = document.evaluate("//ul[@class='publ-list']//div[@class='data']", document, null, XPathResult.ORDERED_NODE_ITERATOR_TYPE);
-		var listElem = document.createElement('ul');
+	box = 
+
+	function constructDBLPList(html) {
+		var pubs = document.evaluate("//ul[@class='publ-list']", html, null, XPathResult.ORDERED_NODE_ITERATOR_TYPE);
+		if (pubs && pubs.firstChild) {
+			return pubs;
+		} else {
+			pubs.setAttribute("style",)
+		}
+		var e;
+		while ((e = pubs.iteratorNext())) {
+			listElem.appendChild(e);
+		}
+		listElem.setAttribute("class", );
 	}
 
-	function(get)
-	GM_xmlhttpRequest({
-		http://dblp.uni-trier.de/rec/bib1/conf/fossacs/HasuoJS08.bib
-		http://dblp.uni-trier.de/doi?doi=
-		method: 'GEt',,
-		url: 'lj'
-		onload: function(res) {
-
-			if @s
+	function listfetch(urlgen) {
+		return function (fallback) {
+			var url = urlgen();
+			if url {
+				GM_xmlhttpRequest({
+					url: urlgen(),
+					onload: function() {
+						var list = constructDBLPList(res.responseText);
+						if (list) {
+							box.replaceChild(list, box.firstChild);
+						} else {
+							fallback();
+						}
+					},
+					onerror: function() {
+						box.textContent = "dblpbib: error";
+					},
+					onabort : function() {
+						box.textContent = "dblpbib: abort";
+					},
+					ontimeout : function() {
+						box.textContent = "dblpbib: timeout";
+					}
+				});
+			} else {
+				fallback();
+			}
 		}
-	})
+	}
+
+	var listfetchbydoi = listfetch(function() {
+		return doi ? "http://dblp.uni-trier.de/doi?doi="+doi : null;
+	});
+	var listfetchbyinfo = listfetch(function() {
+		return "http://dblp.uni-trier.de/doi?doi="+doi;
+	});
+	var notfound = function() {
+		box.textContent = "dblpbib: not found";
+	}
+
+	listfetchbydoi(function() { listfetchbyinfo(notfound()); });
 })();
