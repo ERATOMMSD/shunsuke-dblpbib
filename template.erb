@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+	<title>Bookmarklets</title>
+	<link rel="stylesheet" type="text/css" href="../style.css" />
+	<meta charset="UTF-8" />
+<html>
+<body>
+	<h1 id="bookmarklets">Bookmarklets</h1>
+	<%- ENV['ITEMS'].split.each do |item| -%>
+<%= File.read(item+".html") -%>
+<p><a href="<%= ERB::Util.html_escape(File.read(item+".url")) -%>">link</a></p>
+	<%- end -%>
+	<h1 id="source_codes">Source codes</h1>
+	<p><a href="<%= ENV['ARCHIVE'] %>">Original JavaScript source codes, and tools to generate bookmarklets and this page.</p>
+	<footer><a href="../">Go up to Shunsuke Shimizu's page</a></footer>
+</body>
