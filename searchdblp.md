@@ -1,5 +1,5 @@
 # SearchDBLP
-Search the corresponding dblp entry from a publisher's page.
+Search the corresponding DBLP entry from a publisher's page.
 
 Currently
 
@@ -8,4 +8,4 @@ Currently
 - IEEE Xplore
 - Springer Link
 
-are supported.
+are supported. Patches to support other sites (or any improvement) are welcome.
