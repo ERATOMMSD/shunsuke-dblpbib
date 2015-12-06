@@ -8,7 +8,7 @@ bookmarklets.html: template.erb $(ITEMS:=.html) $(ITEMS:=.min.js) $(ARCHIVE)
 	ITEMS="$(ITEMS)" ARCHIVE="$(ARCHIVE)" DATE="$(DATE)" erb -T - template.erb > $@
 
 $(ARCHIVE):
-	git archive --format=zip --prefix=bookmarklets/ HEAD -o $@
+	git archive --format=zip --prefix=bookmarklets/ --worktree-attributes HEAD -o $@
 
 %.html: %.md
 	pandoc -t html5 --base-header-level=2 -o $@ $<

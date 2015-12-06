@@ -1,3 +1,3 @@
-yuicompressor-*.jar
-.gitattributes
-.gitignore
+yuicompressor-*.jar export-ignore
+.gitattributes export-ignore
+.gitignore export-ignore
