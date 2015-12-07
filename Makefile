@@ -4,7 +4,7 @@ COMMIT := $(shell git log -1 --format=%h)
 DATE := $(shell git log -1 --date=iso --format=%ad)
 ARCHIVE := bookmarklets-$(COMMIT).zip
 
-bookmarklets.html: template.erb $(ITEMS:=.html) $(ITEMS:=.min.js) $(ARCHIVE)
+index.html: template.erb $(ITEMS:=.html) $(ITEMS:=.min.js) $(ARCHIVE)
 	ITEMS="$(ITEMS)" ARCHIVE="$(ARCHIVE)" DATE="$(DATE)" erb -T - template.erb > $@
 
 $(ARCHIVE):
