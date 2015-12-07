@@ -2,7 +2,7 @@
 	var doiXPath, titleXPath, authorsXPath;
 	switch (window.location.hostname) {
 	case "www.sciencedirect.com":
-		doiXPath     = "id('ddDoi')/text()";
+		doiXPath     = "substring(id('ddDoi')/text(), 5)";
 		titleXPath   = "//h1[@class='svTitle']/text()";
 		authorsXPath = "//a[@class='authorName svAuthor']/text()";
 		break;
