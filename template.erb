@@ -1,18 +1,17 @@
 <%- include ERB::Util -%>
 <!DOCTYPE html>
 <html>
-	<title>Bookmarklets</title>
+	<title>Bookmarklet</title>
 	<link rel="stylesheet" type="text/css" href="../style.css" />
 	<meta charset="UTF-8" />
 	<meta name="date" content="<%= ENV['DATE'] %>">
 <html>
 <body>
-	<h1 id="bookmarklets">Bookmarklets</h1>
 	<%- ENV['ITEMS'].split.each do |item| -%>
-<%= File.read(item+".html").sub(%r!(<h2.*?>)(.*?)(</h2>)!, "\\1<a href=\"javascript:#{h(u(File.read(item+".min.js")))}\">\\2</a>\\3") -%>
+	<%= File.read(item+".html").sub(%r!(<h1.*?>.*?</h1>)!, "\\1<p><a href=\"javascript:#{h(u(File.read(item+".min.js")))}\">(Bookmarklet link.)</a></p>") -%>
 	<%- end -%>
 	<h1 id="source_codes">Source codes</h1>
-	<p><a href="<%= ENV['ARCHIVE'] %>">Original JavaScript source codes, and tools to generate bookmarklets and this page.</a> These are distributed under the <a href="http://creativecommons.org/publicdomain/zero/1.0/">CC0 license</a>.</p>
+	<p><a href="https://github.com/grafi-tt/searchdblp-bookmarklet">Original JavaScript source codes, and tools to generate bookmarklets and this page.</a> These are distributed under the <a href="http://creativecommons.org/publicdomain/zero/1.0/">CC0 license</a>.</p>
 	<footer><hr />
 		<p>Last update: <%= ENV['DATE'] %></p>
 		<p><a href="../">Go up to Shunsuke Shimizu's page</a></p>

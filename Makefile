@@ -11,7 +11,7 @@ $(ARCHIVE):
 	git archive --format=zip --prefix=bookmarklets/ --worktree-attributes HEAD -o $@
 
 %.html: %.md
-	pandoc -t html5 --base-header-level=2 -o $@ $<
+	pandoc -t html5 --base-header-level=1 -o $@ $<
 
 %.min.js: %.js
 	$(YUI) $< > $@
